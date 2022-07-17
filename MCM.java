@@ -4,6 +4,55 @@ import java.util.Scanner;
 public class MCM {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Masukkan banyak p : ");
+        int n = sc.nextInt();
+        int p[] = new int[n];
+        System.out.println("Masukkan nilai p :");
+        for (int i = 0; i < n; i++) {
+            p[i] = sc.nextInt();
+        }
+
+        sc.close();
+        System.out.println();
+        ArrayList<int[][]> al = MatrixChainOrder(p);
+        int m[][] = al.get(0);
+        int s[][] = al.get(1);
+
+        System.out.println("Tabel M");
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                if (i == 0 & j == 0)
+                    System.out.print("   ");
+                else if (j == 0)
+                    System.out.printf(" %d ", i);
+                else if (i == 0)
+                    System.out.printf(" %6d  ", j);
+                else
+                    System.out.printf("[%6d] ", m[i][j]);
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println("Tabel S");
+        for (int i = 0; i < s.length; i++) {
+            for (int j = 0; j < s[i].length; j++) {
+                if (i == 0 & j == 0)
+                    System.out.print("   ");
+                else if (j == 0)
+                    System.out.printf(" %d ", i);
+                else if (i == 0)
+                    System.out.printf(" %d  ", j);
+                else
+                    System.out.printf("[%d] ", s[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.print("Pekurungan optimal : ");
+        printOptimalParentheses(1, p.length - 1, p.length, s);
+        System.out.println();
+        System.out.println("Nilai termurah     : " + m[1][p.length - 1]);
     }
 
     static char x = 'A';
@@ -35,6 +84,7 @@ public class MCM {
     }
 
     public static void printOptimalParentheses(int i, int j, int n, int[][] p) {
+
         if (i == j) {
             System.out.print(x++);
         } else {
@@ -44,5 +94,4 @@ public class MCM {
             System.out.print(")");
         }
     }
-    
 }
